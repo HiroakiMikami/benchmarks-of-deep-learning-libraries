@@ -1,0 +1,9 @@
+*
+!*/
+!/LICENSE
+!/.gitignore
+!/requirements.txt
+!/Makefile
+!/baseline/**/*.py
+!/baseline/**/*.sh
+!/benchmark/**/*.py
