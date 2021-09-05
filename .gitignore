@@ -2,6 +2,7 @@
 !*/
 !/LICENSE
 !/.gitignore
+!/pyproject.toml
 !/requirements.txt
 !/Makefile
 !/baseline/**/*.py

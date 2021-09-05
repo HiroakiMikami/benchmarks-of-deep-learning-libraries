@@ -1,5 +1,5 @@
-import os
 import argparse
+import os
 import random
 import string
 import subprocess
@@ -15,23 +15,21 @@ def main() -> None:
 
     random.seed(args.seed)
 
-    str0 = "".join(
-        random.choices(string.ascii_letters + string.digits, k=100)
-    )
-    str1 = "".join(
-        random.choices(string.ascii_letters + string.digits, k=200)
-    )
+    str0 = "".join(random.choices(string.ascii_letters + string.digits, k=100))
+    str1 = "".join(random.choices(string.ascii_letters + string.digits, k=200))
 
-    path = os.path.join(
-        args.target_dir, "cpu", "longest_common_subsequence.sh"
-    )
+    path = os.path.join(args.target_dir, "cpu", "longest_common_subsequence.sh")
 
     cmd = [
         path,
-        "--str0", str0,
-        "--str1", str1,
-        "--n-warmup", str(args.n_warmup),
-        "--n-measure", str(args.n_measure),
+        "--str0",
+        str0,
+        "--str1",
+        str1,
+        "--n-warmup",
+        str(args.n_warmup),
+        "--n-measure",
+        str(args.n_measure),
     ]
     p = subprocess.run(cmd, capture_output=True)
     assert p.returncode == 0, f"returncode={p.returncode}"

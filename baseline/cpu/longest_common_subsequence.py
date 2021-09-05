@@ -1,6 +1,7 @@
-import torch
 import argparse
 import time
+
+import torch
 
 
 def length_of_longest_common_subsequence(str0: str, str1: str) -> int:
@@ -13,8 +14,8 @@ def length_of_longest_common_subsequence(str0: str, str1: str) -> int:
             if str0[i] == str1[j]:
                 table[i + 1, j + 1] = table[i, j] + 1
             else:
-                table[i + 1, j + 1] = max(table[i + 1, j], table[i, j + 1])
-    return table[-1, -1]
+                table[i + 1, j + 1] = torch.max(table[i + 1, j], table[i, j + 1])
+    return int(table[-1, -1].item())
 
 
 def main() -> None:
