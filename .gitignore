@@ -7,4 +7,6 @@
 !/Makefile
 !/baseline/**/*.py
 !/baseline/**/*.sh
+!/torch_script/**/*.py
+!/torch_script/**/*.sh
 !/benchmark/**/*.py
