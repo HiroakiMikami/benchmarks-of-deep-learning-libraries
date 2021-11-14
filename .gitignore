@@ -6,8 +6,6 @@
 !/pyproject.toml
 !/requirements.txt
 !/Makefile
-!/baseline/**/*.py
-!/baseline/**/*.sh
-!/torch_script/**/*.py
-!/torch_script/**/*.sh
-!/benchmark/**/*.py
+!/cpu/**/*.py
+!/launcher/**/*.py
+!/test/**/*.py

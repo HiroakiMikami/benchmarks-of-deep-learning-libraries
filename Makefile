@@ -7,4 +7,4 @@ lint:
 	pysen run lint
 
 test:
-	pytest baseline/test
+	PYTHONPATH=. pytest test

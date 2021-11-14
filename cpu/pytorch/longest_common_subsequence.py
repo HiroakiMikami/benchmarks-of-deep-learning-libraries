@@ -1,10 +1,11 @@
 import argparse
 import time
+import os
+import json
 
 import torch
 
 
-@torch.jit.script
 def length_of_longest_common_subsequence(str0: str, str1: str) -> int:
     N = len(str0)
     M = len(str1)
@@ -25,7 +26,10 @@ def main() -> None:
     parser.add_argument("--str1", type=str, required=True)
     parser.add_argument("--n-warmup", type=int, required=True)
     parser.add_argument("--n-measure", type=int, required=True)
+    parser.add_argument("--out", type=str, required=True)
     args = parser.parse_args()
+
+    n = length_of_longest_common_subsequence(args.str0, args.str1)
 
     for _ in range(args.n_warmup):
         length_of_longest_common_subsequence(args.str0, args.str1)
@@ -35,7 +39,13 @@ def main() -> None:
         length_of_longest_common_subsequence(args.str0, args.str1)
     avg_sec = (time.time() - begin) / args.n_measure
 
-    print(f"{avg_sec} #benchmark-time[sec]")
+    with open(os.path.join(args.out, "out.json"), "w") as file:
+        json.dump({
+            "time_sec": avg_sec,
+            "str0": args.str0,
+            "str1": args.str1,
+            "output": n,
+        }, file)
 
 
 if __name__ == "__main__":
