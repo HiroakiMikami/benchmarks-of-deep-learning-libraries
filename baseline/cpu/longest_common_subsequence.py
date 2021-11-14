@@ -1,5 +1,7 @@
 import argparse
 import time
+import os
+import json
 
 import torch
 
@@ -24,17 +26,20 @@ def main() -> None:
     parser.add_argument("--str1", type=str, required=True)
     parser.add_argument("--n-warmup", type=int, required=True)
     parser.add_argument("--n-measure", type=int, required=True)
+    parser.add_argument("--out", type=str, required=True)
     args = parser.parse_args()
 
     for _ in range(args.n_warmup):
-        length_of_longest_common_subsequence(args.str0, args.str1)
+        ans = length_of_longest_common_subsequence(args.str0, args.str1)
+    print(f"ans: {ans}")
 
     begin = time.time()
     for _ in range(args.n_measure):
         length_of_longest_common_subsequence(args.str0, args.str1)
     avg_sec = (time.time() - begin) / args.n_measure
 
-    print(f"{avg_sec} #benchmark-time[sec]")
+    with open(os.path.join(args.out, "time.json"), "w") as file:
+        json.dump({"time_sec": avg_sec}, file)
 
 
 if __name__ == "__main__":

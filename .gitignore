@@ -2,6 +2,7 @@
 !*/
 !/LICENSE
 !/.gitignore
+!/README.md
 !/pyproject.toml
 !/requirements.txt
 !/Makefile
