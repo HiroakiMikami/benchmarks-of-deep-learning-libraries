@@ -5,7 +5,9 @@
 !/README.md
 !/pyproject.toml
 !/requirements.txt
+!/setup.py
 !/Makefile
 !/cpu/**/*.py
+!/cpu/**/*.pyx
 !/launcher/**/*.py
 !/test/**/*.py

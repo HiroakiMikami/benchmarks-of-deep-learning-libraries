@@ -19,7 +19,9 @@ def main() -> None:
     str0 = "".join(random.choices(string.ascii_letters + string.digits, k=100))
     str1 = "".join(random.choices(string.ascii_letters + string.digits, k=200))
 
-    path = os.path.join(os.getcwd(), "cpu", args.target, "longest_common_subsequence.py")
+    path = os.path.join(
+        os.getcwd(), "cpu", args.target, "longest_common_subsequence.py"
+    )
     out_dir = os.path.join(args.out_dir, args.target)
     os.makedirs(out_dir, exist_ok=True)
 
@@ -34,7 +36,8 @@ def main() -> None:
         str(args.n_warmup),
         "--n-measure",
         str(args.n_measure),
-        "--out", out_dir,
+        "--out",
+        out_dir,
     ]
     p = subprocess.run(cmd)
     assert p.returncode == 0, f"returncode={p.returncode}"

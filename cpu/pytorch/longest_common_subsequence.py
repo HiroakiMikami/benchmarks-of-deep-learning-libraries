@@ -1,7 +1,7 @@
 import argparse
-import time
-import os
 import json
+import os
+import time
 
 import torch
 
@@ -40,12 +40,15 @@ def main() -> None:
     avg_sec = (time.time() - begin) / args.n_measure
 
     with open(os.path.join(args.out, "out.json"), "w") as file:
-        json.dump({
-            "time_sec": avg_sec,
-            "str0": args.str0,
-            "str1": args.str1,
-            "output": n,
-        }, file)
+        json.dump(
+            {
+                "time_sec": avg_sec,
+                "str0": args.str0,
+                "str1": args.str1,
+                "output": n,
+            },
+            file,
+        )
 
 
 if __name__ == "__main__":

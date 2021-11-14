@@ -3,43 +3,38 @@ import json
 import os
 import time
 
-import torch
-import torchvision
-
-
-def _flip(value: torch.Tensor) -> torch.Tensor:
-    return torchvision.transforms.RandomHorizontalFlip(p=1.0)(value)  # type: ignore
+from cpu.cython._longest_common_subsequence import  length_of_longest_common_subsequence
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input-path", type=str, required=True)
+    parser.add_argument("--str0", type=str, required=True)
+    parser.add_argument("--str1", type=str, required=True)
     parser.add_argument("--n-warmup", type=int, required=True)
     parser.add_argument("--n-measure", type=int, required=True)
     parser.add_argument("--out", type=str, required=True)
     args = parser.parse_args()
 
-    data = torch.load(args.input_path)  # type: ignore
-
-    output = _flip(data)
+    n = length_of_longest_common_subsequence(args.str0, args.str1)
 
     for _ in range(args.n_warmup):
-        _flip(data)
+        length_of_longest_common_subsequence(args.str0, args.str1)
 
     begin = time.time()
     for _ in range(args.n_measure):
-        _flip(data)
+        length_of_longest_common_subsequence(args.str0, args.str1)
     avg_sec = (time.time() - begin) / args.n_measure
 
     with open(os.path.join(args.out, "out.json"), "w") as file:
         json.dump(
             {
                 "time_sec": avg_sec,
+                "str0": args.str0,
+                "str1": args.str1,
+                "output": n,
             },
             file,
         )
-    torch.save(output, os.path.join(args.out, "output"))
-    torch.save(data, os.path.join(args.out, "input"))
 
 
 if __name__ == "__main__":

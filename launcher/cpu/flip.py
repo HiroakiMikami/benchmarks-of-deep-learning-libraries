@@ -1,10 +1,10 @@
 import argparse
 import os
-import torch
 import random
-import tempfile
-import string
 import subprocess
+import tempfile
+
+import torch
 
 
 def main() -> None:
@@ -36,7 +36,8 @@ def main() -> None:
             str(args.n_warmup),
             "--n-measure",
             str(args.n_measure),
-            "--out", out_dir,
+            "--out",
+            out_dir,
         ]
         p = subprocess.run(cmd)
     assert p.returncode == 0, f"returncode={p.returncode}"
