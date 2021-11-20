@@ -7,7 +7,7 @@ import pytest
 import torch
 
 
-@pytest.mark.parametrize("env", ["pytorch", "torchscript"])
+@pytest.mark.parametrize("env", ["pytorch", "torchscript", "albumentations"])
 def test_lcs(env: str) -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         img = (

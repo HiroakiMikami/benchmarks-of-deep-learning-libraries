@@ -1,2 +1,4 @@
-torch==1.9.1
+torch
+torchvision
 pysen
+albumentations
