@@ -6,7 +6,16 @@ import tempfile
 import pytest
 
 
-@pytest.mark.parametrize("env", ["pytorch", "torchscript", "cython"])
+@pytest.mark.parametrize(
+    "env",
+    [
+        "pytorch",
+        "torchscript",
+        "cython",
+        "jax",
+        # pytest.param("jax", marks=pytest.mark.xfail(reason="jax does not support if")),
+    ]
+)
 def test_lcs(env: str) -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         cmd = [

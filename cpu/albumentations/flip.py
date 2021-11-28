@@ -8,7 +8,10 @@ import albumentations as A
 
 
 def _flip(value: torch.Tensor) -> torch.Tensor:
-    return A.HorizontalFlip(p=1.0)(image=value.numpy())  # type: ignore
+    flip = A.HorizontalFlip(p=1.0)
+    batch = value.numpy()
+    image = [torch.tensor(flip(image=img)["image"]) for img in batch]
+    return torch.stack(image)
 
 
 def main() -> None:
